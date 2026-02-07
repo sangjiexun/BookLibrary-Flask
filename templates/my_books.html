@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}My Books - Book Library Management System{% endblock %}
+
+{% block content %}
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h4>My Borrowed Books</h4>
+            <hr>
+            
+            {% if borrow_records %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Book Title</th>
+                            <th>Borrow Date</th>
+                            <th>Due Date</th>
+                            <th>Return Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in borrow_records %}
+                        <tr>
+                            <td>{{ record.book.title }}</td>
+                            <td>{{ record.borrow_date.strftime('%Y-%m-%d') }}</td>
+                            <td>{{ record.due_date.strftime('%Y-%m-%d') }}</td>
+                            <td>{{ record.return_date.strftime('%Y-%m-%d') if record.return_date else 'Not returned' }}</td>
+                            <td>{{ record.status }}</td>
+                            <td>
+                                {% if record.status == 'borrowed' %}
+                                <form action="{{ url_for('return_book', id=record.id) }}" method="post">
+                                    <button type="submit" class="btn btn-sm btn-success">Return</button>
+                                </form>
+                                {% else %}
+                                <button class="btn btn-sm btn-secondary" disabled>Returned</button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="alert alert-info">
+                You haven't borrowed any books yet.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
