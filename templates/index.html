@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Book Library Management System{% endblock %}
+
+{% block content %}
+    <div class="jumbotron mt-4">
+        <h1 class="display-4">Welcome to Book Library</h1>
+        <p class="lead">A comprehensive system for managing book library operations, including book borrowing, returning, and inventory management.</p>
+        <hr class="my-4">
+        <p>Use the navigation menu above to access various features of the system.</p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('books') }}" role="button">Browse Books</a>
+        <a class="btn btn-secondary btn-lg ml-2" href="{{ url_for('borrow') }}" role="button">Borrow Book</a>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Browse Books</h5>
+                    <p class="card-text">Explore our collection of books by title, author, or category.</p>
+                    <a href="{{ url_for('books') }}" class="btn btn-primary">Browse Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Borrow Books</h5>
+                    <p class="card-text">Borrow books from our library with a simple process.</p>
+                    <a href="{{ url_for('borrow') }}" class="btn btn-primary">Borrow Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">My Books</h5>
+                    <p class="card-text">View and manage your borrowed books.</p>
+                    <a href="{{ url_for('my_books') }}" class="btn btn-primary">View My Books</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
