@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}{{ book.title }} - Book Library Management System{% endblock %}
+
+{% block content %}
+    <div class="row mt-4">
+        <div class="col-md-8">
+            <h4>{{ book.title }}</h4>
+            <p class="text-muted">By {{ book.author }}</p>
+            <hr>
+            
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Book Details</h5>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Title</th>
+                                <td>{{ book.title }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Author</th>
+                                <td>{{ book.author }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">ISBN</th>
+                                <td>{{ book.isbn }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Category</th>
+                                <td>{{ book.category.name }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Stock</th>
+                                <td>{{ book.stock }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    {% if book.stock > 0 %}
+                    <a href="{{ url_for('borrow') }}" class="btn btn-primary">Borrow This Book</a>
+                    {% else %}
+                    <button class="btn btn-secondary" disabled>Out of Stock</button>
+                    {% endif %}
+                    <a href="{{ url_for('books') }}" class="btn btn-secondary ml-2">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
